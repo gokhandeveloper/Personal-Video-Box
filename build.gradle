@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'io.videooftheday'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    compile ('org.web3j:core:4.8.4')
+    compile "com.sparkjava:spark-core:2.9.3"
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.29'
+
+}
+
+test {
+    useJUnitPlatform()
+}
