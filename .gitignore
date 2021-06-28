@@ -24,6 +24,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+###React##
+ui/ui-react/node_modules/
 ##############################
 ## Gradle
 ##############################
