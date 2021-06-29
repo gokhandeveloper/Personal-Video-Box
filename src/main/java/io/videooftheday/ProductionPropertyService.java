@@ -10,8 +10,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ProductionPropertyService implements Property {
-    private static Logger logger = LoggerFactory.getLogger(ProductionPropertyService.class);
-    private Properties props;
+    private static final Logger logger = LoggerFactory.getLogger(ProductionPropertyService.class);
+    private final Properties props;
 
     public ProductionPropertyService() {
         props = new Properties();
