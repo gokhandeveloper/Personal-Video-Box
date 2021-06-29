@@ -11,7 +11,6 @@ public class VideoOfTheDay {
     private static Logger logger = LoggerFactory.getLogger(VideoOfTheDay.class);
     private static final String API_NOT_IMPLEMENTED = "API not implemented.";
     private static final String INTERNAL_SERVER_ERROR = "Internal server error.";
-
     private Routes routes = new Routes();
 
     public void start(UseCaseContext useCaseContext) {
@@ -56,9 +55,7 @@ public class VideoOfTheDay {
         });
     }
     private void setLog() {
-        before((request, response) -> {
-            logger.info("URL request: " + request.requestMethod() + " " + request.uri() + " - headers: " + request.headers());
-        });
+        before((request, response) -> logger.info("URL request: " + request.requestMethod() + " " + request.uri() + " - headers: " + request.headers()));
     }
     private void configureNotImplemented() {
         notFound((req, res) -> {

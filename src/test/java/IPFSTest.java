@@ -3,10 +3,7 @@ import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
-import java.io.IOException;
-import java.util.Queue;
 
 public class IPFSTest {
 
@@ -18,12 +15,9 @@ public class IPFSTest {
         if(temporaryFile.exists() && !temporaryFile.isDirectory()) {
             NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(temporaryFile);
             MerkleNode addResult = ipfs.add(file).get(0);
-            Assertions.assertTrue((addResult.hash.toString().startsWith("Q")));
             temporaryFile.delete();
-
+            Assertions.assertTrue((addResult.hash.toString().startsWith("Q")));
         }
-
-
     }
 }
 

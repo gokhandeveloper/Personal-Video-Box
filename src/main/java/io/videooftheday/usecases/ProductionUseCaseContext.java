@@ -1,21 +1,22 @@
 package io.videooftheday.usecases;
 
+import io.videooftheday.ProductionPropertyService;
 import io.videooftheday.Property;
-import io.videooftheday.usecases.UseCaseContext;
 
 public class ProductionUseCaseContext implements UseCaseContext {
+    private final ProductionPropertyService productionPropertyService;
     private String [] arguments= {};
 
+    public ProductionUseCaseContext() {
+        productionPropertyService = new ProductionPropertyService();
+    }
     @Override
     public Property getProperty() {
-        return null;
+        return productionPropertyService;
     }
 
     @Override
-    public String []  getArguments() {
-        return arguments;
-
-    }
+    public String []  getArguments() { return arguments; }
 
     @Override
     public void addArguments(String[] args) {
