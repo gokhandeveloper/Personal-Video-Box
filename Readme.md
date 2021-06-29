@@ -28,3 +28,6 @@ Decentralised Storage
 Requirements
 Node14
 Java11
+
+## Development
+Gradle>build to build the project for production
