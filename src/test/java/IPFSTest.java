@@ -1,13 +1,9 @@
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
-import io.videooftheday.VideoOfTheDayLauncher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.rmi.server.ExportException;
 
 public class IPFSTest {
 
@@ -27,12 +23,8 @@ public class IPFSTest {
     @Test
     public void videoFileCreate() throws Exception {
         IPFS ipfs = new IPFS("/dns4/ipfs.infura.io/tcp/5001/https");
-
         String path = "src/test/resources/test_video1.mp4";
-
         File temporaryFile = new File(path);
-        System.out.println(temporaryFile);
-//
         if(temporaryFile.exists() && !temporaryFile.isDirectory()) {
             System.out.println("temporaryFile");
             NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(temporaryFile);
@@ -40,9 +32,6 @@ public class IPFSTest {
             System.out.println(addResult.hash);
             Assertions.assertTrue((addResult.hash.toString().startsWith("Q")));
         }
-
-
-
     }
 }
 

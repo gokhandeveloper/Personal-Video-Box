@@ -6,41 +6,43 @@ import ReactPlayer from "react-player";
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state= {
-            buffer: null
+        this.state = {
+            buffer: null,
+            fileHash: null,
+            walletIsFound: false
         };
     }
 
-    async AlertDismissibleExample() {
+    alertDismissibleExample() {
 
+        if(this.state.walletIsFound===false) {
             return (
-                <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                <Alert variant="danger">
                     <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                    <p>
-                        Change this and that and try again. Duis mollis, est non commodo
-                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                        Cras mattis consectetur purus sit amet fermentum.
+                    <p> Please use Metamask wallet!
                     </p>
                 </Alert>
             );
-
-        return <Button onClick={() => setShow(true)}>Show Alert</Button>;
+        }
     }
 
     async componentDidMount() {
 
         await this.loadWeb3()
+
     }
 
     async loadWeb3() {
         if (window.ethereum) {
-    console.log("eth11")
+
+            this.setState({walletIsFound: true})
+            console.log("eth11")
         }
         else if (window.web3) {
-
+            this.setState({walletIsFound: true})
         }
         else {
-           // setShow(true);
+            this.setState({walletIsFound: false})
         }
     }
     render( ) {
@@ -51,9 +53,8 @@ class App extends Component {
                 <Navbar.Collapse id="responsive-navbar-nav">
                 </Navbar.Collapse>
             </Navbar>
-
+                {this.alertDismissibleExample()}
                 <Container fluid={"md"} >
-
                     {/*https://ipsf.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg*/}
                     < div style={{ width: 660, height: 'auto' }}>
                         <ReactPlayer url="https://ipfs.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg" />
