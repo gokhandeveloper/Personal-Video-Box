@@ -13,17 +13,19 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
-
+    jcenter()
 }
 
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testCompile "org.web3j:web3j-unit:4.5.11"
     compile ('org.web3j:core:4.8.4')
     compile "com.sparkjava:spark-core:2.9.3"
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.29'
     implementation 'com.github.ipfs:java-ipfs-http-client:v1.3.3'
+
 }
 
 test {
