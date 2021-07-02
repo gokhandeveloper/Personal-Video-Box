@@ -87,8 +87,8 @@ public class BlockChainTest {
         Assertions.assertTrue(videoSmartContract.getContractAddress().equals(contractAddress));
         Assertions.assertTrue(videoSmartContract.isValid());
 
-        videoSmartContract.setVideo("123").send();
-        Assertions.assertEquals("123", videoSmartContract.getVideo().send());
+        videoSmartContract.setVideo("videoFileHash").send();
+        Assertions.assertEquals("videoFileHash", videoSmartContract.getVideo().send());
         web3j.shutdown();
     }
 
