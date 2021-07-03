@@ -2,6 +2,7 @@ import React, {Component, useState} from 'react';
 import {Alert, Button, Container, Form, Nav, Navbar, NavDropdown, ResponsiveEmbed} from "react-bootstrap";
 import FormFileInput from "react-bootstrap/FormFileInput";
 import ReactPlayer from "react-player";
+import detectEthereumProvider from '@metamask/detect-provider';
 
 class App extends Component {
     constructor(props) {
@@ -11,6 +12,14 @@ class App extends Component {
             fileHash: null,
             walletIsFound: false
         };
+    }
+
+    walletNotFound = (e) => {
+        this.setState({walletIsFound: false})
+    }
+
+    walletFound = (e) => {
+        this.setState({walletIsFound: true})
     }
 
     alertDismissibleExample() {
@@ -29,22 +38,91 @@ class App extends Component {
     async componentDidMount() {
 
         await this.loadWeb3()
+        await this.loadBlockchainData()
 
     }
 
     async loadWeb3() {
-        if (window.ethereum) {
+        const provider = await detectEthereumProvider();
 
-            this.setState({walletIsFound: true})
-            console.log("eth11")
+        function walletFound() {
+            console.log("")
+
         }
-        else if (window.web3) {
-            this.setState({walletIsFound: true})
+
+        if (provider) {
+            console.log(provider)
+            let currentAccount = null
+            provider
+                .request({ method: 'eth_accounts' })
+                .then(handleAccountsChanged)
+                .catch((err) => {
+                    // Some unexpected error.
+                    // For backwards compatibility reasons, if no accounts are available,
+                    // eth_accounts will return an empty array.
+
+                    console.error(err);
+                });
+
+
+// Note that this event is emitted on page load.
+// If the array of accounts is non-empty, you're already
+// connected.
+            provider.on('accountsChanged', handleAccountsChanged);
+            // handleAccountsChanged == () =>  {
+            //
+            // }
+
+            // For now, 'eth_accounts' will continue to always return an array
+            function handleAccountsChanged(accounts) {
+                if (accounts.length === 0) {
+                    // MetaMask is locked or the user has not connected any accounts
+                    
+                    console.log('Please connect to MetaMask.');
+                } else if (accounts[0] !== currentAccount) {
+                    currentAccount = accounts[0];
+                    console.log(provider.networkVersion);
+                }
+            }
+
+
+            // From now on, this should always be true:
+            // provider === window.ethereum
+           // startApp(provider); // initialize your app
+        } else {
+           // App.this.setState({walletIsFound: false})
+            console.log('Please install MetaMask!');
         }
-        else {
-            this.setState({walletIsFound: false})
-        }
+
+        // if (typeof window.ethereum !== 'undefined') {
+        //     console.log(window.ethereum.selectedAddress)
+        //     this.setState({walletIsFound: true})
+        // }
+        // else {
+        //     this.setState({walletIsFound: false})
+        // }
     }
+
+
+
+
+    async loadBlockchainData() {
+        // const web3 = window.web3
+        // // Load account
+        // const accounts = await web3.eth.getAccounts()
+        // this.setState({ account: accounts[0] })
+        // const networkId = await web3.eth.net.getId()
+        // const networkData = Meme.networks[networkId]
+        // if(networkData) {
+        //     const contract = web3.eth.Contract(Meme.abi, networkData.address)
+        //     this.setState({ contract })
+        //     const memeHash = await contract.methods.get().call()
+        //     this.setState({ memeHash })
+        // } else {
+        //     window.alert('Smart contract not deployed to detected network.')
+        // }
+    }
+
     render( ) {
         return (
             <div>   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
