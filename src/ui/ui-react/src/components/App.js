@@ -135,7 +135,9 @@ class App extends Component {
                 <Container fluid={"md"} >
                     {/*https://ipsf.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg*/}
                     < div style={{ width: 660, height: 'auto' }}>
-                        <ReactPlayer url="https://ipfs.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg" />
+                        <ReactPlayer url="https://ipfs.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg"
+                        controls={true}
+                        />
                     </div>
 
                     <Form onSubmit={this.onFileSubmission}>
