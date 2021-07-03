@@ -2,14 +2,9 @@ import React, {Component, useState} from 'react';
 import {Alert, Button, Container, Form, Nav, Navbar, NavDropdown, ResponsiveEmbed} from "react-bootstrap";
 import FormFileInput from "react-bootstrap/FormFileInput";
 import ReactPlayer from "react-player";
-
-// This function detects most providers injected at window.ethereum
 import detectEthereumProvider from '@metamask/detect-provider';
 
-
 class App extends Component {
-   provider;
-
     constructor(props) {
         super(props)
         this.state = {
@@ -17,7 +12,6 @@ class App extends Component {
             fileHash: null,
             walletIsFound: false
         };
-        this.handleAccountsChanged = this.handleAccountsChanged.bind(this);
     }
 
     walletNotFound = (e) => {
@@ -83,13 +77,11 @@ class App extends Component {
             function handleAccountsChanged(accounts) {
                 if (accounts.length === 0) {
                     // MetaMask is locked or the user has not connected any accounts
-                    this.walletNotFound()
                     
                     console.log('Please connect to MetaMask.');
                 } else if (accounts[0] !== currentAccount) {
                     currentAccount = accounts[0];
                     console.log(provider.networkVersion);
-                    this.walletFound();
                 }
             }
 
