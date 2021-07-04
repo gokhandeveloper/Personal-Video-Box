@@ -98,14 +98,10 @@ public class BlockChainTest {
                 .load(contractAddress,web3j, transactionManager, contractGasProvider);
         Assertions.assertTrue(videoSmartContract.getContractAddress().equals(contractAddress));
         Assertions.assertTrue(videoSmartContract.isValid());
+        TransactionReceipt transactionReceipt = videoSmartContract.setVideo("videoFileHash2").send();
 
-
-            TransactionReceipt transactionReceipt = videoSmartContract.setVideo("videoFileHash2").send();
-
-            Assertions.assertEquals("videoFileHash2", videoSmartContract.getVideo().send());
-           // web3j.shutdown();
-
-
+        Assertions.assertEquals("videoFileHash2", videoSmartContract.getVideo().send());
+        web3j.shutdown();
     }
 
     @Test
