@@ -80,22 +80,13 @@ class App extends Component {
     }
 
     async loadBlockchainData() {
-        // const networkId = await web3.eth.net.getId()
-        // const networkData = Meme.networks[networkId]
-        // if(networkData) {
-        //     const contract = web3.eth.Contract(Meme.abi, networkData.address)
-        //     this.setState({ contract })
-        //     const memeHash = await contract.methods.get().call()
-        //     this.setState({ memeHash })
-        // } else {
-        //     window.alert('Smart contract not deployed to detected network.')
-        // }
+
     }
 
     render( ) {
         return (
             <div>   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Video Of the Day</Navbar.Brand>
+                <Navbar.Brand href="#home">Personal Video Box</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 </Navbar.Collapse>

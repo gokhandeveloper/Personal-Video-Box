@@ -1,7 +1,7 @@
-# 🚀 Video of the Day
+# 🚀 Personal Video Box
 This is a JAVA DApp which allows users to upload a video.
 
-The video is stored in a decentralised storage(IPFS for now).
+The video is stored in a decentralised storage(IPFS for now) which means it cannot be deleted or censored.
 The reference(the video file hash) to the video is stored on the blockchain(Ethereum for now).
 Use cases:
 - User uploads a video to the website via the UI.
