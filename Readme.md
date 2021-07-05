@@ -34,6 +34,11 @@ Decentralised Storage
 
 ## Java Development
 Gradle>build to build the project for production
+## Solidity Development
+
+Contracts are located under src/main/solidity folder
+
+Run the gradle task generateContractWrappers to generate contracts.
 ## UI Development
 Go to ui/ui-react folder and run the following:
 npm install
