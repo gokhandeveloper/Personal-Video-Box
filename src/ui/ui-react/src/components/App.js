@@ -1,6 +1,5 @@
-import React, {Component, useState} from 'react';
-import {Alert, Button, Container, Form, Nav, Navbar, NavDropdown, ResponsiveEmbed} from "react-bootstrap";
-import FormFileInput from "react-bootstrap/FormFileInput";
+import React, {Component} from 'react';
+import {Alert, Button, Container, Form, Navbar} from "react-bootstrap";
 import ReactPlayer from "react-player";
 import detectEthereumProvider from '@metamask/detect-provider';
 
@@ -25,12 +24,11 @@ class App extends Component {
     }
 
     alertDismissibleExample() {
-
         if(this.state.walletIsFound===false) {
             return (
                 <Alert variant="danger">
-                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                    <p> Please use Metamask wallet!
+                    <Alert.Heading>Wallet not found</Alert.Heading>
+                    <p> Please enable your Metamask wallet and link the correct address.
                     </p>
                 </Alert>
             );
@@ -52,12 +50,9 @@ class App extends Component {
             let currentAccount = null
             provider
                 .request({ method: 'eth_accounts' })
-                .then(
-                    this.getAccount(currentAccount, provider)
-                        )
-
+                .then(this.getAccount(currentAccount, provider))
                 .catch((err) => {
-                    this.walletFound(false)
+                    this.walletNotFound()
                     console.error(err);
                 });
 
@@ -66,21 +61,20 @@ class App extends Component {
         } else {
             console.log('Please install MetaMask!');
         }
-
     }
 
     getAccount(currentAccount, provider) {
         return accounts => {
             if (accounts.length === 0) {
-                // MetaMask is locked or the user has not connected any accounts
-
+                // MetaMask is locked or the user has not connected any account
+                this.walletNotFound()
                 console.log('Please connect to MetaMask.');
             } else if (accounts[0] !== currentAccount) {
                 currentAccount = accounts[0];
                 console.log(provider.selectedAddress);
                 this.setState({account: provider.selectedAddress});
                 this.setState({blockchain: provider.networkVersion});
-                this.walletFound(true)
+                this.walletFound()
             }
         };
     }
