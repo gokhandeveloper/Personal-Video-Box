@@ -11,7 +11,8 @@ class App extends Component {
             blockchain: '',
             buffer: null,
             fileHash: null,
-            walletIsFound: false
+            walletIsFound: false,
+            issue:""
         };
     }
 
@@ -23,13 +24,12 @@ class App extends Component {
         this.setState({walletIsFound: true})
     }
 
-    alertDismissibleExample() {
+    alertDismissibleExample(issue) {
         if(this.state.walletIsFound===false) {
             return (
                 <Alert variant="danger">
-                    <Alert.Heading>Wallet not found</Alert.Heading>
-                    <p> Please enable your Metamask wallet and link the correct address.
-                    </p>
+                    <Alert.Heading>Wallet issue</Alert.Heading>
+                    <p>{issue}</p>
                 </Alert>
             );
         }
@@ -44,7 +44,6 @@ class App extends Component {
 
     async loadMetaMaskWallet() {
         const provider = await detectEthereumProvider();
-
         if (provider) {
             console.log(provider)
             let currentAccount = null
@@ -54,21 +53,23 @@ class App extends Component {
                 .catch((err) => {
                     this.walletNotFound()
                     console.error(err);
+                    this.setState({issue:"Issue occured with metamask"+err })
                 });
 
-            provider.on('accountsChanged', this.getAccount);
+            provider.on('accountsChanged', this.getAccount(currentAccount, provider));
 
         } else {
             console.log('Please install MetaMask!');
+            this.setState({issue:"Please install MetaMask!" })
         }
     }
 
     getAccount(currentAccount, provider) {
         return accounts => {
-            if (accounts.length === 0) {
-                // MetaMask is locked or the user has not connected any account
+            if (this.walletIsLockedOrNotconnectedToAnyAccount(accounts)) {
                 this.walletNotFound()
                 console.log('Please connect to MetaMask.');
+                this.setState({issue:"Please connect to MetaMask." })
             } else if (accounts[0] !== currentAccount) {
                 currentAccount = accounts[0];
                 console.log(provider.selectedAddress);
@@ -77,6 +78,10 @@ class App extends Component {
                 this.walletFound()
             }
         };
+    }
+
+    walletIsLockedOrNotconnectedToAnyAccount(accounts) {
+        return accounts.length === 0;
     }
 
     async loadBlockchainData() {
@@ -90,9 +95,9 @@ class App extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 </Navbar.Collapse>
-               <div style={{color:"white"}}>{this.state.account} </div>
+               <div style={{color:"white"}}> {this.state.account} </div>
             </Navbar>
-                {this.alertDismissibleExample()}
+                {this.alertDismissibleExample(this.state.issue)}
                 <Container fluid={"md"} >
                     {/*https://ipsf.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg*/}
                     < div style={{ width: 660, height: 'auto' }}>
