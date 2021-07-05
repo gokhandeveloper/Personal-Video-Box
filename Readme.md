@@ -1,7 +1,8 @@
 # 🚀 Video of the Day
-This is a JAVA DApp which allows users to upload a video
-The video is stored in a decentralised storage.
-The reference(the video file hash) to the video is stored on the blockchain.
+This is a JAVA DApp which allows users to upload a video.
+
+The video is stored in a decentralised storage(IPFS for now).
+The reference(the video file hash) to the video is stored on the blockchain(Ethereum for now).
 Use cases:
 - User uploads a video to the website via the UI.
 - The video gets uploaded to a storage.
@@ -17,7 +18,7 @@ UI
 - React+ Webpack for UI
   https://reactjs.org/
   
-Blockchain
+Blockchain API
 - Web3j - ETH API.
   https://github.com/web3j/web3j
   
@@ -25,15 +26,22 @@ Decentralised Storage
 - IPFS
   https://ipfs.io/
   
-Requirements
-Node14
-Java11
+## Requirements
+- Node14
+- Java11
+- Ganache to spin up a local blockchain
+- Metamask on your web browser
 
-## Development
+## Java Development
 Gradle>build to build the project for production
+## UI Development
+Go to ui/ui-react folder and run the following:
+npm install
 
+The following will start the watch server where you can make changes to ui code and the browser will refresh automatically if a change is detected.
+npx webpack serve --mode development --env development
 
-##Test video 1 credit:
+### Test video 1 credit:
 https://www.videvo.net/video/car-driving-through-icelandic-landscape/452786/
 
 https://www.videvo.net/profile/videvo/
