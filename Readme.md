@@ -27,8 +27,8 @@ Decentralised Storage
   https://ipfs.io/
   
 ## Requirements
-- Node14
-- Java11
+- Nodejs 14
+- Java 11
 - Ganache to spin up a local blockchain
 - Metamask on your web browser
 
@@ -36,7 +36,7 @@ Decentralised Storage
 Gradle>build to build the project for production
 ## Solidity Development
 
-Contracts are located under src/main/solidity folder
+Smart contracts are located under src/main/solidity folder
 
 Run the gradle task generateContractWrappers to generate contracts.
 ## UI Development
