@@ -24,7 +24,7 @@ class App extends Component {
         this.setState({walletIsFound: true})
     }
 
-    alertDismissibleExample(issue) {
+    alert(issue) {
         if(this.state.walletIsFound===false) {
             return (
                 <Alert variant="danger">
@@ -97,7 +97,7 @@ class App extends Component {
                 </Navbar.Collapse>
                <div style={{color:"white"}}> {this.state.account} </div>
             </Navbar>
-                {this.alertDismissibleExample(this.state.issue)}
+                {this.alert(this.state.issue)}
                 <Container fluid={"md"} >
                     {/*https://ipsf.infura.io/ipfs/QmW8V2bkHdk3RcGb3AiTFnkkAsxpMnGAZPcipXh3qTqqtg*/}
                     < div style={{ width: 660, height: 'auto' }}>
